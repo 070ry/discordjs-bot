@@ -6,6 +6,6 @@ module.exports = {
   },
   execute(interaction, client) {
     const start = Date.now()
-    interaction.reply({ content: 'こちらの機能は現在開発中ですので、', ephemeral: true })
+    interaction.reply({ content: 'こちらの機能は現在開発中です。', ephemeral: true })
   },
 }
