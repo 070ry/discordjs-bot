@@ -1,20 +1,16 @@
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client } = require("discord.js");
 const config = require("../data/config");
-const logger = require("../utils/logger");
+const { log } = require("../utils/logger");
 
 /**
  * @returns {Promise<import("discord.js").Client>}
  */
 module.exports.init = async () => {
-  const intents = [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ];
+  const intents = config.client.intents;
 
-  const allowedMentions = ["roles", "users"];
+  const allowedMentions = config.client.allowedMentions;
 
-  logger.log("[ Client ] Initializing...");
+  log("[ Client ] Initializing...");
   const client = new Client({
     intents,
     allowedMentions,
