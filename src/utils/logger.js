@@ -8,7 +8,6 @@ const colors = {
   info: '\x1b[34m', // 青
   warn: '\x1b[33m', // 黄色
   error: '\x1b[31m', // 赤
-  log: '\x1b[0m', // リセット
   reset: '\x1b[0m', // リセット
 }
 
