@@ -15,7 +15,7 @@ const config = {
      * ボットのバージョンです。
      * @property {string} version - ボットのバージョンです。
      */
-    version: "1.0.0",
+    version: "1.0.1",
     /**
      * ボットコマンドをトリガーするための接頭辞です。
      * @property {string} prefix - ボットコマンドをトリガーするための接頭辞です。

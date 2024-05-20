@@ -6,11 +6,11 @@ const { log } = require("../utils/logger");
  * @returns {Promise<import("discord.js").Client>}
  */
 module.exports.init = async () => {
-  const intents = config.client.intents;
+  log("[ Client ] Initializing...");
 
+  const intents = config.client.intents;
   const allowedMentions = config.client.allowedMentions;
 
-  log("[ Client ] Initializing...");
   const client = new Client({
     intents,
     allowedMentions,
