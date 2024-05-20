@@ -1,26 +1,26 @@
-const { Client } = require('discord.js')
+const { Client, GatewayIntentBits, AllowedMentionsTypes } = require('discord.js')
 const config = require('../data/config')
-const { log } = require('../utils/logger')
+const logger = require('../utils/logger')
 
 /**
- * @returns {Promise<import("discord.js").Client>}
+ * Create a new Discord client instance
+ * @returns {Promise<Client>} Discord client instance
+ * @throws {Error} If the provided token is invalid
  */
 module.exports.init = async () => {
-  log('[ Client ] Initializing...')
+  logger.log('[ Client ] Initializing...')
 
   const intents = config.client.intents
-  const allowedMentions = config.client.allowedMentions
 
   const client = new Client({
     intents,
-    allowedMentions,
     failIfNotExists: false,
   })
 
   try {
     await client.login(config.general.token)
     return client
-  } catch (e) {
-    throw new Error(e, { cause: 'Invalid token' })
+  } catch (error) {
+    throw new Error('Invalid token', { cause: error })
   }
 }
