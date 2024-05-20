@@ -1,5 +1,5 @@
-const { GatewayIntentBits } = require("discord.js");
-require("dotenv").config();
+const { GatewayIntentBits } = require('discord.js')
+require('dotenv').config()
 
 /**
  * ボットの設定を格納するオブジェクトです。
@@ -15,12 +15,12 @@ const config = {
      * ボットのバージョンです。
      * @property {string} version - ボットのバージョンです。
      */
-    version: "1.0.1",
+    version: '1.0.1',
     /**
      * ボットコマンドをトリガーするための接頭辞です。
      * @property {string} prefix - ボットコマンドをトリガーするための接頭辞です。
      */
-    prefix: "!",
+    prefix: '!',
     /**
      * Discordボットのトークンです。
      * @property {string} token - Discordボットのトークンです。
@@ -36,21 +36,17 @@ const config = {
      * Discordクライアントのインテントです。
      * @property {Array} intents - Discordクライアントのインテントです。
      */
-    intents: [
-      GatewayIntentBits.Guilds,
-      GatewayIntentBits.GuildMessages,
-      GatewayIntentBits.MessageContent,
-    ],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
     /**
      * Discordクライアントのメンションの許可設定です。
      * @property {Array} allowedMentions - Discordクライアントのメンションの許可設定です。
      */
-    allowedMentions: ["roles", "users"],
+    allowedMentions: ['roles', 'users'],
   },
-};
+}
 
 /**
  * 設定オブジェクトをエクスポートします。
  * @exports config
  */
-module.exports = config;
+module.exports = config
