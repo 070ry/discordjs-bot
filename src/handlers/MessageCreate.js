@@ -1,6 +1,6 @@
-const logger = require('../utils/logger')
-const { Collection } = require('discord.js')
-const fs = require('fs')
+const logger = require('../utils/logger');
+const { Collection } = require('discord.js');
+const fs = require('fs');
 
 /**
  * メッセージを受け取ったときの処理
@@ -9,43 +9,43 @@ const fs = require('fs')
  * @param {import("../data/config")} config - 設定
  */
 module.exports = async (e, client, config) => {
-  const content = e.content
-  if (!content.startsWith(config.general.prefix)) return
-  const command = content.split(' ')[0]
+  const content = e.content;
+  if (!content.startsWith(config.general.prefix)) return;
+  const command = content.split(' ')[0];
 
   if (command === config.general.prefix + 'sync') {
-    const reply = await e.reply('コマンドをアップデートしています...')
+    const reply = await e.reply('コマンドをアップデートしています...');
     try {
-      const dir = config.general.__root + '/commands'
-      const files = await fs.readdirSync(dir).filter((file) => file.endsWith('.js'))
+      const dir = config.general.__root + '/commands';
+      const files = await fs.readdirSync(dir).filter(file => file.endsWith('.js'));
 
-      client.commands = await new Collection()
+      client.commands = await new Collection();
       for await (const file of files) {
         /**
          * @type {import("discord.js").ApplicationCommand}
          */
-        const command = require(`${dir}/${file}`)
-        client.commands.set(command.data.name, command)
+        const command = require(`${dir}/${file}`);
+        client.commands.set(command.data.name, command);
         if (command.data.aliases) {
           for (const alias of command.data.aliases) {
             const object = {
               ...command.data,
               name: alias,
-            }
+            };
             client.commands.set(alias, {
               ...command,
               data: object,
-            })
+            });
           }
         }
       }
-      await client.guilds.cache.forEach((guild) => {
-        guild.commands.set(client.commands.map((cmd) => cmd.data))
-      })
-      reply.edit('コマンドをアップデートしました。')
+      await client.guilds.cache.forEach(guild => {
+        guild.commands.set(client.commands.map(cmd => cmd.data));
+      });
+      reply.edit('コマンドをアップデートしました。');
     } catch (error) {
-      logger.error(error)
-      reply.edit('アップデートに失敗しました。')
+      logger.error(error);
+      reply.edit('アップデートに失敗しました。');
     }
   }
-}
+};
