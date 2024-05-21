@@ -1,33 +1,11 @@
-const { GatewayIntentBits, AllowedMentionsTypes } = require('discord.js')
-require('dotenv').config()
+const { GatewayIntentBits, AllowedMentionsTypes } = require('discord.js');
+require('dotenv').config();
 
 /**
  * ボットの設定を格納するオブジェクトです。
  * @constant {Object}
  */
 const config = {
-  /**
-   * 全般の設定項目です。
-   * @property {Object} general
-   */
-  general: {
-    __root: __dirname + '/../',
-    /**
-     * ボットのバージョンです。
-     * @property {string} version - ボットのバージョンです。
-     */
-    version: '1.0.1',
-    /**
-     * ボットコマンドをトリガーするための接頭辞です。
-     * @property {string} prefix - ボットコマンドをトリガーするための接頭辞です。
-     */
-    prefix: '!',
-    /**
-     * Discordボットのトークンです。
-     * @property {string} token - Discordボットのトークンです。
-     */
-    token: process.env.token,
-  },
   /**
    * Discordクライアントの設定項目です。
    * @property {Object} client
@@ -44,10 +22,10 @@ const config = {
      */
     allowedMentions: [AllowedMentionsTypes.Users, AllowedMentionsTypes.User],
   },
-}
+};
 
 /**
  * 設定オブジェクトをエクスポートします。
  * @exports config
  */
-module.exports = config
+module.exports = config;
