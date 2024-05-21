@@ -8,7 +8,7 @@ const { log } = require('./utils/logger');
   const client = await init();
 
   for (const event of Object.keys(Handlers)) {
-    log(`[ Events/${event} ] Loaded!`);
+    log(`[ Events ] ${event} を登録中...`);
     client.on(Events[event], e => Handlers[event](e, client, config));
   }
 })();

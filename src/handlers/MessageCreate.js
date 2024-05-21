@@ -1,51 +1,44 @@
-const logger = require('../utils/logger');
-const { Collection } = require('discord.js');
 const fs = require('fs');
+const path = require('path');
+const { Collection } = require('discord.js');
+
+const env = require('../data/env');
 
 /**
- * メッセージを受け取ったときの処理
- * @param {import("discord.js").Message} e - 受け取ったメッセージ
- * @param {import("discord.js").Client} client - Discordのクライアント
- * @param {import("../data/config")} config - 設定
+ * メッセージ受信イベントのハンドラ
+ * @param {import("discord.js").Message} e - 受信したメッセージ
+ * @param {import("discord.js").Client} client - Discordクライアント
  */
-module.exports = async (e, client, config) => {
+module.exports = async (e, client) => {
   const content = e.content;
-  if (!content.startsWith(config.general.prefix)) return;
-  const command = content.split(' ')[0];
+  if (!content.startsWith(env.prefix)) return;
+  const command = content.split(' ')[0].slice(env.prefix.length);
 
-  if (command === config.general.prefix + 'sync') {
-    const reply = await e.reply('コマンドをアップデートしています...');
+  if (command === 'sync') {
+    const reply = await e.reply('コマンドを更新しています...');
     try {
-      const dir = config.general.__root + '/commands';
-      const files = await fs.readdirSync(dir).filter(file => file.endsWith('.js'));
+      const commands = new Collection();
+      const dir = path.join(env.root, 'commands');
+      const files = await fs.readdir(dir);
 
-      client.commands = await new Collection();
-      for await (const file of files) {
-        /**
-         * @type {import("discord.js").ApplicationCommand}
-         */
-        const command = require(`${dir}/${file}`);
-        client.commands.set(command.data.name, command);
+      for (const file of files) {
+        if (!file.endsWith('.js')) continue;
+        const command = require(path.join(dir, file));
+        commands.set(command.data.name, command);
         if (command.data.aliases) {
           for (const alias of command.data.aliases) {
-            const object = {
-              ...command.data,
-              name: alias,
-            };
-            client.commands.set(alias, {
-              ...command,
-              data: object,
-            });
+            commands.set(alias, command);
           }
         }
       }
+
       await client.guilds.cache.forEach(guild => {
-        guild.commands.set(client.commands.map(cmd => cmd.data));
+        guild.commands.set(commands.map(cmd => cmd.data));
       });
-      reply.edit('コマンドをアップデートしました。');
+      await reply.edit('コマンドを更新しました。');
     } catch (error) {
       logger.error(error);
-      reply.edit('アップデートに失敗しました。');
+      await reply.edit('更新に失敗しました。');
     }
   }
 };

@@ -1,4 +1,6 @@
-module.exports = (e, client, config) => {
+const env = require('../data/env');
+
+module.exports = (e, client) => {
   const { log } = require('../utils/logger');
-  log(`[ Events/ClientReady ] Logged in as ${client.user.tag}! Version: ${config.general.version}`);
+  log(`[ Events/ClientReady ] Bot: ${client.user.tag} Version: ${env.version}`);
 };
