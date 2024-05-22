@@ -1,7 +1,7 @@
 {
   "name": "example-bot",
   "module": "src/index.js",
-  "type": "commonjs",
+  "version": "1.0.2",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^20.12.12"

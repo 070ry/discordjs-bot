@@ -1,17 +1,27 @@
-const { version: packageVersion } = require('../../package.json');
 require('dotenv').config();
+
+const { version } = require('../../package.json');
 
 /**
  * 環境変数の設定
  * @property {string} token - DiscordのBotのトークン
- * @property {string} prefix - コマンドのプレフィックス
- * @property {string} version - バージョン
- * @property {string} root - プロジェクトのルートパス
  */
 const env = {
   token: process.env.token,
+  /**
+   * コマンドのプレフィックス
+   * @property {string}
+   */
   prefix: process.env.prefix || '!',
-  version: process.env.version || packageVersion || 'unknown',
+  /**
+   * バージョン
+   * @property {string}
+   */
+  version: process.env.version || version || 'unknown',
+  /**
+   * プロジェクトのルートパス
+   * @property {string}
+   */
   root: process.env.root || __dirname + '/..',
 };
 

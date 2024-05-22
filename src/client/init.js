@@ -19,6 +19,7 @@ module.exports.init = async () => {
     allowedMentions,
     intents,
     failIfNotExists: false,
+    ws: { properties: { browser: 'Discord iOS' } },
   });
 
   try {
