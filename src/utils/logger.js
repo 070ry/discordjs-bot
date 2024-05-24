@@ -42,7 +42,7 @@ module.exports = {
    * エラーメッセージをログに出力する
    * @param {string} message - ログメッセージ
    */
-  error: message => error(format('error', message)),
+  error: message => error(message),
 
   /**
    * 警告メッセージをログに出力する

@@ -12,11 +12,9 @@ const env = require('../data/env');
 module.exports.init = async () => {
   logger.log('[ Client ] 初期化中...');
 
-  const allowedMentions = config.client.allowedMentions;
   const intents = config.client.intents;
 
   const client = new Client({
-    allowedMentions,
     intents,
     failIfNotExists: false,
     ws: { properties: { browser: 'Discord iOS' } },

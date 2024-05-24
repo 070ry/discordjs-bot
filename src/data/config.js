@@ -1,4 +1,4 @@
-const { GatewayIntentBits, AllowedMentionsTypes } = require('discord.js');
+const { GatewayIntentBits } = require('discord.js');
 require('dotenv').config();
 
 /**
@@ -16,11 +16,6 @@ const config = {
      * @property {Array} intents - Discordクライアントのインテントです。
      */
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
-    /**
-     * Discordクライアントのメンションの許可設定です。
-     * @property {Array} allowedMentions - Discordクライアントのメンションの許可設定です。
-     */
-    allowedMentions: [AllowedMentionsTypes.Users, AllowedMentionsTypes.User],
   },
 };
 

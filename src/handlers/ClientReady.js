@@ -4,8 +4,8 @@ const env = require('../data/env');
 
 module.exports = (e, client) => {
   const { log } = require('../utils/logger');
-  presense(client);
-  return log(`[ Events/ClientReady ] Bot: ${client.user.tag} Version: ${env.version}`);
+  // presense(client);
+  return log(`[ Client ] Ready as ${client.user.tag} - ${env.version}`);
 };
 /**
  *
