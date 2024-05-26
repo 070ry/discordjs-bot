@@ -1,11 +1,9 @@
 const logger = require('../utils/logger');
 const remover = require('../client/commandRemove');
 
-const config = require('../data/config');
-
 const fs = require('fs');
 const path = require('path');
-const { Collection, ButtonStyle, ButtonBuilder, ActionRowBuilder } = require('discord.js');
+const { Collection } = require('discord.js');
 
 const env = require('../data/env');
 

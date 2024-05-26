@@ -1,3 +1,4 @@
+const process = require('process');
 const logger = require('./utils/logger');
 const config = require('./data/config');
 const { Events, Handlers } = require('./handlers');

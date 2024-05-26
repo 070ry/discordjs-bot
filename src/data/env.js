@@ -1,6 +1,8 @@
+const process = require('process');
 require('dotenv').config();
 
 const { version } = require('../../package.json');
+const path = require('path');
 
 /**
  * 環境変数の設定
@@ -21,8 +23,9 @@ const env = {
   /**
    * プロジェクトのルートパス
    * @property {string}
+   * eslint-disable-next-line no-unused-vars
    */
-  root: process.env.root || __dirname + '/..',
+  root: process.env.root || path.join(process.cwd(), 'src'),
 };
 
 module.exports = env;

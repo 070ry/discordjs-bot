@@ -1,6 +1,6 @@
 const env = require('../../data/env');
 
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ComponentType } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ComponentType } = require('discord.js');
 /** @type {import('../../types/command').Command} */
 module.exports = {
   data: {

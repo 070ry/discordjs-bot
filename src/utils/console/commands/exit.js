@@ -5,6 +5,7 @@
  */
 
 const logger = require('../../logger');
+const process = require('process');
 
 /**
  * Executes the "exit" command.

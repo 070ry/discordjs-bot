@@ -9,7 +9,7 @@ const env = require('../data/env');
  * @type {import("discord.js").Client} client - Discordクライアントのインスタンス
  */
 module.exports = (e, client) => {
-  // presense(client);
+  presense(client);
   return logger.log(
     `[ Client ] Ready as ${client.user.tag} - ${env.version}\n` + `Type 'help' to see console command help.`,
   );
