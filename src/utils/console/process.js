@@ -48,4 +48,3 @@ async function runCommand(command, args, client) {
     logger.warn(`Console command not found: ${command}`);
   }
 }
-
