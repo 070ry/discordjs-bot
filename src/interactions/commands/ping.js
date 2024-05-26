@@ -1,3 +1,6 @@
+/**
+ * @type {import("../../types/command").Command}
+ */
 module.exports = {
   data: {
     name: 'ping',

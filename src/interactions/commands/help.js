@@ -1,7 +1,7 @@
 const env = require('../../data/env');
 
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ComponentType } = require('discord.js');
-/** @type {import('../../types/commands').Command} */
+/** @type {import('../../types/command').Command} */
 module.exports = {
   data: {
     name: 'help',
