@@ -54,14 +54,21 @@ module.exports = async (e, client) => {
       await reply.edit('更新に失敗しました。');
     }
   }
-  if (command === 'test') {
-    e.reply({
-      content: 'test',
-      components: [
-        new ActionRowBuilder().addComponents(
-          new ButtonBuilder().setCustomId('help').setLabel('help').setStyle(ButtonStyle.Success),
-        ),
-      ],
-    });
-  }
+  executeCommand(client, e, command, args);
 };
+
+/**
+ *
+ * @param {import("discord.js").Client} client - Discordクライアント
+ * @param {string} command
+ * @param {string[]} args
+ */
+function executeCommand(client, e, command, args) {
+  if (fs.existsSync(path.join(env.root, 'messages', 'commands', `${command}.js`))) {
+    const cmd = require(path.join(env.root, 'messages', 'commands', `${command}.js`));
+    if (!cmd.execute) {
+      return logger.warn('コマンドの実行に失敗しました: execute関数がありません。 (' + command + ')');
+    }
+    cmd.execute(client, e, args, cmd);
+  }
+}

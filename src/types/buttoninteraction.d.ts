@@ -7,7 +7,7 @@ export class Interaction extends ButtonInteraction {
   /**
    * コマンドのデータです。
    */
-  public data: {
+  data: {
     customId: string;
     aliases?: string[];
   };
@@ -18,5 +18,5 @@ export class Interaction extends ButtonInteraction {
    * @param client - Discordクライアントオブジェクトです。
    * @returns Promise<void>
    */
-  private execute(interaction: Interaction, client: Client<boolean>): Promise<void>;
+  execute(interaction: Interaction, client: Client<boolean>): Promise<void>;
 }

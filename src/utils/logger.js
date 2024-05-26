@@ -18,7 +18,7 @@ const colors = {
  * @returns {string} - フォーマット済みのログメッセージ
  */
 function format(level, message) {
-  return `${colors[level]}[ ${level} ] ${message}${colors.log}`;
+  return `${colors[level]}[ ${level} ] ${message}${colors.reset}`;
 }
 
 /**

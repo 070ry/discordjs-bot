@@ -8,7 +8,7 @@ export class Command extends SlashCommandBuilder {
   /**
    * コマンドのデータです。
    */
-  public data: {
+  data: {
     name: string;
     description: string;
     options?: any;
@@ -22,5 +22,5 @@ export class Command extends SlashCommandBuilder {
    * @param client - Discordクライアントオブジェクトです。
    * @returns Promise<void>
    */
-  private execute(interaction: Interaction, client: Client<boolean>): Promise<void>;
+  execute(interaction: Interaction, client: Client<boolean>): Promise<void>;
 }
