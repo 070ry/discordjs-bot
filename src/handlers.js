@@ -1,11 +1,12 @@
-const files = require('fs')
-  .readdirSync('./src/handlers')
-  .filter(file => file.endsWith('.js'));
+const handlers = {};
+const events = require('discord.js').Events;
 
-module.exports.Handlers = files.reduce((handlers, file) => {
-  const name = file.replace(/\.js$/, '');
-  handlers[name] = require(`./handlers/${name}`);
-  return handlers;
-}, {});
+for (const file of require('fs').readdirSync('./src/handlers')) {
+  if (file.endsWith('.js')) {
+    const name = file.slice(0, -3);
+    handlers[name] = require(`./handlers/${name}`);
+  }
+}
 
-module.exports.Events = require('discord.js').Events;
+module.exports.Handlers = handlers;
+module.exports.Events = events;

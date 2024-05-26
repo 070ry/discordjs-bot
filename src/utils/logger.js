@@ -2,51 +2,51 @@ const { stdout } = require('process');
 const { info, warn, error } = console;
 
 /**
- * ログメッセージの色の設定
+ * Settings for the color of log messages
  */
 const colors = {
-  info: '\x1b[34m', // 青
-  warn: '\x1b[33m', // 黄色
-  error: '\x1b[31m', // 赤
-  reset: '\x1b[0m', // リセット
+  info: '\x1b[34m', // blue
+  warn: '\x1b[33m', // yellow
+  error: '\x1b[31m', // red
+  reset: '\x1b[0m', // reset
 };
 
 /**
- * ログメッセージを指定されたレベルでフォーマットする
- * @param {string} level - ログレベル (info, warn, error)
- * @param {string} message - ログメッセージ
- * @returns {string} - フォーマット済みのログメッセージ
+ * Formats a log message with the specified level
+ * @param {string} level - Log level (info, warn, error)
+ * @param {string} message - Log message
+ * @returns {string} - Formatted log message
  */
 function format(level, message) {
   return `${colors[level]}[ ${level} ] ${message}${colors.reset}`;
 }
 
 /**
- * ログメッセージを出力するための関数をエクスポートするモジュール
+ * Module that exports functions for outputting log messages
  * @module Logger
  */
 module.exports = {
   /**
-   * 標準出力にログメッセージを出力する
-   * @param {string} message - ログメッセージ
+   * Outputs a log message to standard output
+   * @param {string} message - Log message
    */
   log: message => stdout.write(`${message}\n`),
 
   /**
-   * 情報メッセージをログに出力する
-   * @param {string} message - ログメッセージ
+   * Outputs an info log message
+   * @param {string} message - Log message
    */
   info: message => info(format('info', message)),
 
   /**
-   * エラーメッセージをログに出力する
-   * @param {string} message - ログメッセージ
+   * Outputs an error log message
+   * @param {string} message - Log message
    */
-  error: message => error(message),
+  error: message => error(format('error', message)),
 
   /**
-   * 警告メッセージをログに出力する
-   * @param {string} message - ログメッセージ
+   * Outputs a warning log message
+   * @param {string} message - Log message
    */
   warn: message => warn(format('warn', message)),
 };

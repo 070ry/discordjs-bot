@@ -1,3 +1,6 @@
+/**
+ * @type {import("../../types/button").Button}
+ */
 module.exports = {
   data: {
     customId: 'help',

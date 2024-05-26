@@ -3,6 +3,7 @@ const { ButtonInteraction, InteractionType, StringSelectMenuInteraction } = requ
 const fs = require('fs');
 const path = require('path');
 const env = require('../data/env');
+const logger = require('../utils/logger');
 
 /**
  * コマンドを格納するマップ
@@ -71,24 +72,26 @@ function applicationCommand(e, client) {
  */
 function messageComponent(e, client) {
   if (!e.customId) return;
-  if (e.isButton()) getButtonInteraction(e.customId).execute(e, client);
-  if (e.isStringSelectMenu()) getSelectMenuInteraction(e.customId).execute(e, client);
+  if (e.isButton()) executeButton(e.customId, e, client);
+  if (e.isStringSelectMenu()) executeSelectMenu(e.customId, e, client);
 }
 
 /**
  * @param {string} id
+ * @param {import("discord.js").ButtonInteraction} e
+ * @param {import("discord.js").Client} client
  * @returns {ButtonInteraction}
  */
-function getButtonInteraction(id) {
+function executeButton(id, e, client) {
   const dir = path.join(env.root, 'interactions', 'buttons');
   const files = fs.readdirSync(dir).filter(file => file.endsWith('.js'));
   for (const file of files) {
     const command = require(path.join(dir, file));
     if (!command.data || !command.data.customId || !command.execute) {
-      throw new Error(`Invalid command: ${file}. Missing customId or execute function.`);
+      return logger.error(`Invalid command: ${file}. Missing customId or execute function.`);
     }
     if (command.data.customId === id) {
-      return command;
+      return command.execute(e, client);
     }
   }
 }
@@ -96,22 +99,19 @@ function getButtonInteraction(id) {
 /**
  * 選択メニューのハンドリング
  *
+ * @param {string} id
  * @param {StringSelectMenuInteraction} e
+ * @param {import("discord.js").Client} client
  * @returns {Promise<void>}
  */
-function getSelectMenuInteraction(id) {
-  const dir = path.join(env.root, 'interactions', 'selectmenus');
-  const files = fs.readdirSync(dir).filter(file => fs.statSync(path.join(dir, file)).isDirectory());
+function executeSelectMenu(id, e, client) {
+  const dir = path.join(env.root, 'interactions', 'selectMenus');
+  const files = fs.readdirSync(dir).filter(file => file.endsWith('.js'));
   for (const file of files) {
-    const dir = path.join(env.root, 'interactions', 'selectmenus', file);
-    for (const file of fs.readdirSync(dir).filter(file => file.endsWith('.js'))) {
-      const command = require(path.join(dir, file));
-      if (!command.data || !command.data.customId || !command.execute) {
-        throw new Error(`Invalid command: ${file}. Missing customId or execute function.`);
-      }
-      if (command.data.customId === id) {
-        return command;
-      }
+    const command = require(path.join(dir, file));
+    if (!command.data || !command.data.customId || !command.execute) {
+      return logger.error(`Invalid command: ${file}. Missing customId or execute function.`);
     }
+    return command.execute(e, client);
   }
 }

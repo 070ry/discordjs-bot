@@ -2,11 +2,11 @@ import { Interaction, Client } from 'discord.js';
 import { SlashCommandBuilder } from 'discord.js';
 
 /**
- * コマンドを表すクラスです。
+ * Class representing a command.
  */
 export class Command extends SlashCommandBuilder {
   /**
-   * コマンドのデータです。
+   * Command data.
    */
   data: {
     name: string;
@@ -17,9 +17,9 @@ export class Command extends SlashCommandBuilder {
   };
 
   /**
-   * コマンドを実行します。
-   * @param interaction - インタラクションオブジェクトです。
-   * @param client - Discordクライアントオブジェクトです。
+   * Executes the command.
+   * @param interaction - The interaction object.
+   * @param client - The Discord client object.
    * @returns Promise<void>
    */
   execute(interaction: Interaction, client: Client<boolean>): Promise<void>;

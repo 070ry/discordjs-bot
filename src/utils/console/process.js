@@ -1,44 +1,51 @@
+const path = require('path');
 const fs = require('fs');
-const { join } = require('path');
 
 const env = require('../../data/env');
 const logger = require('../logger');
 
+/**
+ * Module for handling console commands.
+ * @module utils/console/process
+ */
 module.exports = {
+  /**
+   * Starts the console listener.
+   * @param {import('discord.js').Client} client - The Discord client.
+   */
   console: async client => {
-    await process.stdin.on('data', input => {
+    process.stdin.on('data', async input => {
       const args = input.toString().trim().split(' ');
-      const message = args.shift();
+      const command = args.shift();
 
-      if (!message) return;
-
-      runCommand(message, args, client);
+      if (!command) return;
+      await runCommand(command, args, client);
     });
-    logger.log('[ process ] リスナーを起動しました。');
+
+    logger.log('[ process ] Console listener started.');
   },
 };
 
 /**
- * @param {string} command - メッセージ
- * @param {string[]} args - 引数
- * @param {import('discord.js').Client} client - Discordクライアント
+ * Executes a console command.
+ * @param {string} command - The command name.
+ * @param {string[]} args - The command arguments.
+ * @param {import('discord.js').Client} client - The Discord client.
  */
-function runCommand(command, args, client) {
-  const files = fs.readdirSync(join(env.root, 'utils', 'console', 'commands')).filter(file => file.endsWith('.js'));
+async function runCommand(command, args, client) {
+  const commandsDirectory = path.join(env.root, 'utils', 'console', 'commands');
+  const files = fs.readdirSync(commandsDirectory).filter(file => file.endsWith('.js'));
 
   const matchedCommand = files.find(file => {
-    const name = file.replace(/\.js$/, '');
-    const cmd = require(join(env.root, 'utils', 'console', 'commands', file));
-    return name === command;
+    const cmd = require(path.join(commandsDirectory, file));
+    return cmd.name === command;
   });
 
   if (matchedCommand) {
-    const command = require(join(env.root, 'utils', 'console', 'commands', matchedCommand));
-    if (!command.execute) {
-      return logger.warn('コンソール コマンドの実行に失敗しました: execute関数がありません。 (' + command + ')');
-    }
-    command.execute(client, args, command);
+    const commandModule = require(path.join(commandsDirectory, matchedCommand));
+    await commandModule.execute(client, args, commandModule);
   } else {
-    logger.warn('コンソール コマンドが見つかりませんでした: ' + command);
+    logger.warn(`Console command not found: ${command}`);
   }
 }
+

@@ -1,12 +1,10 @@
 const env = require('../../data/env');
 const { EmbedBuilder } = require('discord.js');
 
+/**
+ * @type {import("../../types/command").Command}
+ */
 module.exports = {
-  /**
-   *
-   * @param {import("discord.js").Client} client
-   * @param {import("discord.js").Message} e
-   */
   execute: async (client, e) => {
     await e.reply({
       embeds: [
