@@ -2,9 +2,19 @@
   "name": "example-bot",
   "main": "src/index.js",
   "version": "1.1.0",
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "fmt": "prettier src --write",
+    "start": "node src/index.js",
+    "daemon": "nodemon src/index.js"
+  },
   "devDependencies": {
+    "@eslint/js": "^9.3.0",
     "@types/bun": "latest",
-    "@types/node": "^20.12.12"
+    "@types/node": "^20.12.12",
+    "eslint": "^9.3.0",
+    "globals": "^15.3.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
