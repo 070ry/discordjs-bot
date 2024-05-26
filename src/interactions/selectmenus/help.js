@@ -3,9 +3,9 @@
  */
 module.exports = {
   data: {
-    customId: 'help',
+    customId: 'help'
   },
-  execute: (interaction) => {
+  execute: interaction => {
     interaction.reply({ content: 'こちらの機能は現在開発中です。', ephemeral: true });
-  },
+  }
 };

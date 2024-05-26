@@ -23,5 +23,5 @@ module.exports = {
     await logger.log('[ console ] Stopping the client...');
     client.destroy();
     process.exit(0);
-  },
+  }
 };

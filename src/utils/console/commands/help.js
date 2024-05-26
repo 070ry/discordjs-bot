@@ -19,5 +19,5 @@ module.exports = {
    */
   execute: async () => {
     await logger.log('[ console ] ping, help, restart, tag');
-  },
+  }
 };

@@ -11,7 +11,7 @@ const env = require('../data/env');
 module.exports = (e, client) => {
   presense(client);
   return logger.log(
-    `[ Client ] Ready as ${client.user.tag} - ${env.version}\n` + `Type 'help' to see console command help.`,
+    `[ Client ] Ready as ${client.user.tag} - ${env.version}\n` + `Type 'help' to see console command help.`
   );
 };
 /**
@@ -22,8 +22,8 @@ function presense(client) {
     activities: [
       {
         name: 'Discord.js',
-        type: ActivityType.Competing,
-      },
-    ],
+        type: ActivityType.Competing
+      }
+    ]
   });
 }

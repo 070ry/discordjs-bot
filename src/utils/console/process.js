@@ -23,7 +23,7 @@ module.exports = {
     });
 
     logger.log('[ process ] Console listener started.');
-  },
+  }
 };
 
 /**

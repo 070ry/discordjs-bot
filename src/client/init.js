@@ -17,7 +17,7 @@ module.exports.init = async () => {
   const client = new Client({
     intents,
     failIfNotExists: false,
-    ws: { properties: { browser: 'Discord iOS' } },
+    ws: { properties: { browser: 'Discord iOS' } }
   });
 
   try {

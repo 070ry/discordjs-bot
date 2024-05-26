@@ -25,7 +25,7 @@ const env = {
    * @property {string}
    * eslint-disable-next-line no-unused-vars
    */
-  root: process.env.root || path.join(process.cwd(), 'src'),
+  root: process.env.root || path.join(process.cwd(), 'src')
 };
 
 module.exports = env;

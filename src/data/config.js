@@ -15,8 +15,8 @@ const config = {
      * Discordクライアントのインテントです。
      * @property {Array} intents - Discordクライアントのインテントです。
      */
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
-  },
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+  }
 };
 
 /**

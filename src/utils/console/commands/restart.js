@@ -27,5 +27,5 @@ module.exports = {
       await newClient.on(Events[event], e => Handlers[event](e, newClient));
     }
     await stop;
-  },
+  }
 };

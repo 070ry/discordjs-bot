@@ -27,5 +27,5 @@ module.exports = {
    */
   execute: async client => {
     await logger.log('Client ping: ' + client.ws.ping + 'ms');
-  },
+  }
 };

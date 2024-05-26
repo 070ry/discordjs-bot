@@ -11,9 +11,9 @@ module.exports = {
         new EmbedBuilder({
           author: { name: client.user.tag, iconURL: client.user.displayAvatarURL() },
           title: 'Help',
-          description: `${env.version}`,
-        }),
-      ],
+          description: `${env.version}`
+        })
+      ]
     });
-  },
+  }
 };
