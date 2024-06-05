@@ -1,24 +1,11 @@
-/**
- * This module defines the "restart" command for the console.
- * It destroys the current client instance and creates a new one.
- * It registers all the event handlers for the new client instance.
- * @module utils/console/commands/restart
- */
-
 const { Events, Handlers } = require('../../../handlers');
 const logger = require('../../logger');
 
 /**
- * Executes the "restart" command.
- * @param {import('discord.js').Client} client - The current client instance.
- * @returns {Promise<void>} - A promise that resolves when the command is executed.
+ * @type {import('../../../types/consoleCommands').ConsoleCommands}
  */
 module.exports = {
-  /**
-   * Executes the "restart" command.
-   * @param {import('discord.js').Client} client - The current client instance.
-   * @returns {Promise<void>} - A promise that resolves when the command is executed.
-   */
+  name: 'restart',
   async execute(client) {
     const stop = client.destroy();
     logger.log('[ console ] クライアントを再起動します。');

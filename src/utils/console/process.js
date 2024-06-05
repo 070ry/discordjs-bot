@@ -33,17 +33,17 @@ module.exports = {
  * @param {import('discord.js').Client} client - The Discord client.
  */
 async function runCommand(command, args, client) {
-  const commandsDirectory = path.join(env.root, 'utils', 'console', 'commands');
-  const files = fs.readdirSync(commandsDirectory).filter(file => file.endsWith('.js'));
+  const dir = path.join(env.root, 'utils', 'console', 'commands');
+  const files = fs.readdirSync(dir).filter(file => file.endsWith('.js'));
 
-  const matchedCommand = files.find(file => {
-    const cmd = require(path.join(commandsDirectory, file));
+  const matched = files.find(file => {
+    const cmd = require(path.join(dir, file));
     return cmd.name === command;
   });
 
-  if (matchedCommand) {
-    const commandModule = require(path.join(commandsDirectory, matchedCommand));
-    await commandModule.execute(client, args, commandModule);
+  if (matched) {
+    const module = require(path.join(dir, matched));
+    await module.execute(client, args);
   } else {
     logger.warn(`Console command not found: ${command}`);
   }

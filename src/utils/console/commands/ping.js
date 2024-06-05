@@ -1,31 +1,22 @@
-/**
- * This module defines the "ping" command for the console.
- * It displays the client's ping value.
- * @module utils/console/commands/ping
- */
-
-const logger = require('../../logger'); // Import the logger module
+const logger = require('../../logger');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 
 /**
- * Object that represents the "ping" command.
- * @type {Object}
- * @property {string} name - The name of the command.
- * @property {function} execute - The function that executes the command.
+ * Executes the "ping" command.
+ * @type {import('../../../types/consoleCommands').ConsoleCommands}
+ * @returns {Promise<void>} - A promise that resolves when the command is executed.
  */
 module.exports = {
-  /**
-   * The name of the command.
-   * @type {string}
-   */
   name: 'ping',
 
-  /**
-   * Executes the "ping" command.
-   * It displays the client's ping value.
-   * @param {import('discord.js').Client} client - The current client instance.
-   * @returns {Promise<void>} - A promise that resolves when the command is executed.
-   */
   execute: async client => {
+    const rest = new REST({ version: '9' }).setToken(client.token);
+    const start = Date.now();
+    await rest.get(Routes.gatewayBot());
+    const end = Date.now();
     await logger.log('Client ping: ' + client.ws.ping + 'ms');
+    await logger.log('API ping: ' + (end - start) + 'ms');
   }
 };
+

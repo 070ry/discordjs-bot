@@ -1,24 +1,11 @@
-/**
- * This module defines the "exit" command for the console.
- * It destroys the current client instance and exits the process.
- * @module utils/console/commands/exit
- */
-
 const logger = require('../../logger');
 const process = require('process');
 
 /**
- * Executes the "exit" command.
- * @param {import('discord.js').Client} client - The current client instance.
- * @returns {Promise<void>} - A promise that resolves when the command is executed.
+ * @type {import('../../../types/consoleCommands').ConsoleCommands}
  */
 module.exports = {
-  /**
-   * Executes the "exit" command.
-   * It destroys the current client instance and exits the process.
-   * @param {import('discord.js').Client} client - The current client instance.
-   * @returns {Promise<void>} - A promise that resolves when the command is executed.
-   */
+  name: 'exit',
   execute: async client => {
     await logger.log('[ console ] Stopping the client...');
     client.destroy();
