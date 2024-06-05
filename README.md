@@ -1,4 +1,4 @@
-# neverland-rpg-pinger
+# Discord.js Bot Template
 
 To install dependencies:
 
