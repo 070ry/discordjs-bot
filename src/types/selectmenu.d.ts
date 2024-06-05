@@ -1,11 +1,11 @@
 import { Interaction, Client, StringSelectMenuInteractionResolvedData } from 'discord.js';
 
 /**
- * Class representing a command.
+ * Class representing a select menu.
  */
 export class SelectMenu extends StringSelectMenuInteraction {
   /**
-   * The data of the command.
+   * The data of the selected option.
    */
   data: {
     customId: string;
