@@ -9,10 +9,6 @@ export class Button extends ButtonInteraction {
    */
   data: {
     customId: string;
-    /**
-     * The aliases of the command.
-     */
-    aliases?: string[];
   };
 
   /**
