@@ -1,7 +1,7 @@
 const logger = require('../utils/logger');
 const commandRemover = require('../client/commandRemove');
 const { Collection } = require('discord.js');
-const fs = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
 const env = require('../data/env');
 
@@ -38,17 +38,23 @@ module.exports = async (message, client) => {
   await executeCommand(client, message, command, args);
 };
 
-async function executeCommand(client, message, commandName, args) {
-  const commandPath = path.join(dir, `${commandName}.js`);
-  if (!fs.existsSync(commandPath)) return;
-
-  const command = require(commandPath);
-  if (!command.execute) {
-    logger.warn(`コマンドの実行に失敗しました: execute関数がありません。 (${commandName})`);
+async function executeCommand(client, message, name, args) {
+  const cmdDir = path.join(dir, `${name}.js`);
+  if (!fs.existsSync(cmdDir)) {
+    return logger.warn(`Message Command not found: ${name}`);
+  }
+  const cmd = require(cmdDir);
+  if (typeof cmd.execute !== 'function' || typeof cmd.data !== 'object') {
+    let missings = [];
+    if (typeof cmd.execute !== 'function') missings.push('execute');
+    if (typeof cmd.data !== 'object') missings.push('data');
+    logger.warn(
+      `Failed to execute message command. Missing: ${missings.join(', ')} (${name})`
+    );
     return;
   }
 
-  command.execute(client, message, args, command);
+  cmd.execute(client, message, args);
 }
 
 async function loadCommands(dir) {
@@ -56,14 +62,14 @@ async function loadCommands(dir) {
   const commands = new Collection();
 
   for (const file of files.filter(file => file.endsWith('.js'))) {
-    const command = require(path.join(dir, file));
-    commands.set(command.data.name, command);
-    if (command.data.aliases) {
-      for (const alias of command.data.aliases) {
-        const aliasCommand = { data: { ...command.data }, execute: command.execute };
-        aliasCommand.data.name = alias;
-        delete aliasCommand.data.aliases;
-        commands.set(aliasCommand.data.name, aliasCommand);
+    const cmd = require(path.join(dir, file));
+    commands.set(cmd.data.name, cmd);
+    if (cmd.data.aliases) {
+      for (const a of cmd.data.aliases) {
+        const alias = { data: { ...cmd.data }, execute: cmd.execute };
+        alias.data.name = a;
+        delete alias.data.aliases;
+        commands.set(alias.data.name, alias);
       }
     }
   }

@@ -6,7 +6,8 @@ const { EmbedBuilder } = require('discord.js');
  */
 module.exports = {
   data: {
-    name: 'help'
+    name: 'help',
+    description: 'ヘルプパネルを表示します'
   },
   execute: async (client, e) => {
     await e.reply({

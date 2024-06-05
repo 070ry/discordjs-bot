@@ -7,8 +7,13 @@ const commands = new Map();
 const root = path.join(env.root, 'interactions');
 
 const validateCommand = command => {
-  if (!command.data || !command.data.name || !command.data.description || !command.execute) {
-    throw new Error(`Invalid command: ${command.name}. Missing name, description, or execute function.`);
+  const missing = [];
+  if (!command.data) missing.push('data');
+  if (!command.data.name) missing.push('name');
+  if (!command.data.description) missing.push('description');
+  if (!command.execute) missing.push('execute');
+  if (missing.length > 0) {
+    throw new Error(`Invalid command: ${command.name}. Missing ${missing.join(', ')}.`);
   }
 };
 

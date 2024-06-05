@@ -18,5 +18,5 @@ export class Command {
    * @param client - The Discord client object.
    * @returns Promise<void>
    */
-  execute(interaction: Interaction, client: Client<boolean>): Promise<void>;
+  execute(interaction: Interaction, client: Client<boolean>, args: string[]): Promise<void>;
 }
