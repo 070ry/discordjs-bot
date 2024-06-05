@@ -9,6 +9,9 @@ export class Button extends ButtonInteraction {
    */
   data: {
     customId: string;
+    /**
+     * The aliases of the command.
+     */
     aliases?: string[];
   };
 
@@ -18,5 +21,6 @@ export class Button extends ButtonInteraction {
    * @param client - The Discord client object.
    * @returns Promise<void>
    */
-  execute(interaction: Interaction, client: Client<boolean>): Promise<void>;
+  execute(interaction: ButtonInteraction, client: Client<boolean>): Promise<void>;
 }
+

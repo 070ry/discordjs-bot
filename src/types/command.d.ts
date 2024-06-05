@@ -1,17 +1,13 @@
-import { Interaction, Client } from 'discord.js';
-import { SlashCommandBuilder } from 'discord.js';
+import { ApplicationCommandType, ApplicationCommandData, Interaction, Client } from 'discord.js';
 
 /**
  * Class representing a command.
  */
-export class Command extends SlashCommandBuilder {
+export class Command {
   /**
    * Command data.
    */
-  data: {
-    name: string;
-    description: string;
-    options?: any;
+  data: ApplicationCommandData & {
     defaultPermission?: boolean;
     aliases?: string[];
   };
