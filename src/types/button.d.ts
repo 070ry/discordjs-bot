@@ -3,7 +3,7 @@ import { Interaction, Client, ButtonInteraction } from 'discord.js';
 /**
  * Class representing a command.
  */
-export class Button extends ButtonInteraction {
+export class Button {
   /**
    * The data of the command.
    */
