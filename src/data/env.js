@@ -23,7 +23,6 @@ const env = {
   /**
    * プロジェクトのルートパス
    * @property {string}
-   * eslint-disable-next-line no-unused-vars
    */
   root: process.env.root || path.join(process.cwd(), 'src')
 };
